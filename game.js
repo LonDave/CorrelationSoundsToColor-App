@@ -1,4 +1,4 @@
-
+// selezione degli elementi
 let random;
 let livello = 0;
 const numbersOFBtn = document.querySelectorAll(".btn").length;
@@ -6,6 +6,7 @@ const btn = document.querySelectorAll(".btn");
 const btnStart = document.querySelector("#level-title");
 const serie = document.querySelector("#serie");
 
+// creazione numero casuale
 function randomNumber() {
     let min = 1;
     let max = 4;
@@ -13,6 +14,7 @@ function randomNumber() {
     return random;
 }
 
+// in base al numero capitato si creano gli audio e li si eseguono tramite lo switch
 function audioToRandomNumber() {
     switch (random) {
         case 1:
@@ -36,12 +38,19 @@ function audioToRandomNumber() {
     }
 }
 
+// gestione pulsanti
 function randomBtn() {
+
+    // creazione di ciclo per aggiungere gli eventi a butti gli elementi presenti
     for (let i = 0; i < numbersOFBtn; i++) {
         btn[i].addEventListener("click", function () {
+
+            // verifico condizione con this.id che si riferisce agli elementi selezionati con il for
             if (Number(this.id) === random) {
                 livello += 1;
                 serie.textContent = "Serie: " + livello;
+
+                // tempo di attesa prima di continuare al livello successivo
                 setTimeout(function () {
                     randomNumber();
                     audioToRandomNumber();
@@ -60,6 +69,7 @@ function randomBtn() {
     }
 }
 
+// avvio delle funzioni alla pressione dello start
 btnStart.addEventListener("click", function (e) {
     randomBtn();
     randomNumber();
